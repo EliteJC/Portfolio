@@ -9,7 +9,7 @@
 <body>
 
   <button id="backToTop" title="Go to top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5">
       <path d="M18 15l-6-6-6 6"/>
     </svg>
   </button>
@@ -18,17 +18,17 @@
     <video autoplay muted loop playsinline preload="auto">
       <source src="assets/videos/PortfolioDemoReel.mp4" type="video/mp4">
     </video>
-    
     <div class="hero-overlay"></div>
-
     <div class="hero-content">
       <h1>Juan Devarie</h1>
       <p>Gameplay Programmer // UI Artist</p>
       
-      <nav id="sticky-nav">
-        <a href="#programming" class="nav-link">Projects</a>
-        <a href="#about" class="nav-link">About</a>
-      </nav>
+      <div class="nav-anchor">
+        <nav id="sticky-nav">
+          <a href="#programming" class="nav-link">Projects</a>
+          <a href="#about" class="nav-link">About</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -37,10 +37,21 @@
       <h2 class="section-label">01 // Gameplay Programming</h2>
       <div class="projects-grid">
         <div class="project-card">
-          <div class="card-image"></div>
+          <div class="card-image" style="background-image: url('assets/images/p1.jpg');"></div>
           <div class="card-info">
-            <h3>Random Game #1</h3>
-            <p>Skills Used</p>
+            <div class="card-header"><h3>Example Game #1</h3><span class="project-date">2024</span></div>
+            <p>Game descripter text</p>
+            <div class="tech-stack"><span class="tech-tag">C++</span><span class="tech-tag">OpenGL</span></div>
+            <a href="project-template.html" class="read-more">Read More →</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="card-image" style="background-image: url('assets/images/p1.jpg');"></div>
+          <div class="card-info">
+            <div class="card-header"><h3>Example Game #2</h3><span class="project-date">2024</span></div>
+            <p>Game descripter text</p>
+            <div class="tech-stack"><span class="tech-tag">C++</span><span class="tech-tag">OpenGL</span></div>
+            <a href="project-template.html" class="read-more">Read More →</a>
           </div>
         </div>
       </div>
@@ -49,11 +60,13 @@
     <section id="ui-art" class="projects-container art-bg">
       <h2 class="section-label">02 // UI Art & Design</h2>
       <div class="projects-grid">
-        <div class="project-card art-card">
-          <div class="card-image"></div>
+        <div class="project-card">
+          <div class="card-image" style="background-image: url('assets/images/a1.jpg');"></div>
           <div class="card-info">
-            <h3>Random GUI</h3>
-            <p>Skills Used</p>
+            <div class="card-header"><h3>Example UI #1</h3><span class="project-date">2025</span></div>
+            <p>UI Descripter text</p>
+            <div class="tech-stack"><span class="tech-tag">Photoshop</span><span class="tech-tag">UE5</span></div>
+            <a href="project-template-art.html" class="read-more">View Gallery →</a>
           </div>
         </div>
       </div>
@@ -63,23 +76,29 @@
       <h2 class="section-label">03 // About Me</h2>
       <div class="about-grid">
         <div class="about-text">
-          <p>About me text goes here</p>
+          <p>About me goes here.</p>
           <a href="assets/Juan_Devarie_Resume.pdf" target="_blank" class="resume-btn">
             View Full Resume
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
           </a>
         </div>
         <div class="about-skills">
-          <div class="skill-tag">Blueprints</div>
+          <h3 class="skill-title">Technical Skills</h3>
           <div class="skill-tag">C#</div>
-          <div class="skill-tag">Unreal Engine</div>
+          <div class="skill-tag">Blueprints</div>
+          <div class="skill-tag">Unreal Engine </div>
           <div class="skill-tag">Unity</div>
+          <div class="skill-tag">UI / UX Design</div>
           <div class="skill-tag">Photoshop</div>
           <div class="skill-tag">Illustrator</div>
         </div>
       </div>
     </section>
   </main>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 Juan Devarie.</p>
+  </footer>
 
   <script src="js/main.js"></script>
 </body>

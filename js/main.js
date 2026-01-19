@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById('sticky-nav');
   const navLinks = document.querySelectorAll('.nav-link');
   const bttButton = document.getElementById('backToTop');
-  const stickyPoint = nav.offsetTop - 20;
+  const stickyPoint = nav.offsetTop + 350;
 
   window.addEventListener('scroll', () => {
     if (window.scrollY >= stickyPoint) {
@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bttButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    navLinks.forEach(link => link.classList.remove('active'));
   });
 
   const observerOptions = {
@@ -34,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.forEach(link => {
           link.classList.remove('active');
           
-          // Logic: Both programming and ui-art sections highlight the "Projects" link
           if ((id === 'programming' || id === 'ui-art') && link.getAttribute('href') === '#programming') {
             link.classList.add('active');
           }
@@ -42,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
             link.classList.add('active');
           }
         });
+      } else {
+        if (window.scrollY < 300) {
+          navLinks.forEach(link => link.classList.remove('active'));
+        }
       }
     });
   }, observerOptions);
