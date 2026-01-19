@@ -2,37 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById('sticky-nav');
   const navLinks = document.querySelectorAll('.nav-link');
   const bttButton = document.getElementById('backToTop');
-  
-  // 1. Sticky Nav & Back to Top visibility
   const stickyPoint = nav.offsetTop - 20;
 
+  // 1. Scroll Events (Sticky & Back to Top)
   window.addEventListener('scroll', () => {
-    // Nav Sticky
     if (window.scrollY >= stickyPoint) {
       nav.classList.add('stuck');
     } else {
       nav.classList.remove('stuck');
     }
 
-    // Back to Top button show/hide
-    if (window.scrollY > 800) {
+    if (window.scrollY > 600) {
       bttButton.classList.add('show');
     } else {
       bttButton.classList.remove('show');
     }
   });
 
-  // 2. Back to Top Click
+  // 2. Smooth Back to Top
   bttButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 3. Improved Section Highlighting
-  const sections = document.querySelectorAll('header, section[id]');
-  
+  // 3. Highlight Logic
   const observerOptions = {
-    threshold: 0.2, // Section must be 20% visible
-    rootMargin: "-10% 0px -40% 0px" 
+    threshold: 0.1,
+    rootMargin: "-20% 0px -50% 0px"
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -41,8 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = entry.target.getAttribute('id');
         navLinks.forEach(link => {
           link.classList.remove('active');
-          // Match link href to section ID
-          if (link.getAttribute('href') === `#${id}`) {
+          
+          // Logic: Both programming and ui-art sections highlight the "Projects" link
+          if ((id === 'programming' || id === 'ui-art') && link.getAttribute('href') === '#programming') {
+            link.classList.add('active');
+          }
+          if (id === 'about' && link.getAttribute('href') === '#about') {
             link.classList.add('active');
           }
         });
@@ -50,5 +49,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, observerOptions);
 
-  sections.forEach(section => observer.observe(section));
+  document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
 });
