@@ -98,7 +98,7 @@ body {
   color: #aaa;
   text-decoration: none;
   font-size: 0.8rem;
-  padding: 0.7rem 1.8rem; /* Wide padding for two buttons */
+  padding: 0.7rem 1.8rem;
   transition: all 0.3s ease;
   text-transform: uppercase;
 }
@@ -119,7 +119,6 @@ body {
 
 .nav-link:last-child::after { display: none; }
 
-/* --- Back to Top Button --- */
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -144,7 +143,6 @@ body {
 #backToTop.show { opacity: 1; visibility: visible; }
 #backToTop:hover { transform: translateY(-5px); background: #10b981; color: #000; }
 
-/* --- Sections & Grid --- */
 .projects-container {
   padding: 120px 2rem 80px 2rem;
   max-width: 1100px;
@@ -177,7 +175,6 @@ body {
 
 .art-bg { background: #050505; }
 
-/* --- About Section --- */
 .about-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;

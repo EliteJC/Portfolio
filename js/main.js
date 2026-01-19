@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bttButton = document.getElementById('backToTop');
   const stickyPoint = nav.offsetTop - 20;
 
-  // 1. Scroll Events (Sticky & Back to Top)
   window.addEventListener('scroll', () => {
     if (window.scrollY >= stickyPoint) {
       nav.classList.add('stuck');
@@ -19,12 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 2. Smooth Back to Top
   bttButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 3. Highlight Logic
   const observerOptions = {
     threshold: 0.1,
     rootMargin: "-20% 0px -50% 0px"
