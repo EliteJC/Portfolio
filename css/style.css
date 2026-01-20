@@ -22,18 +22,44 @@ body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter
 .hero-content p { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
 
 .nav-anchor { margin-top: 2.5rem; width: 100%; display: flex; justify-content: center; height: 50px; }
-#sticky-nav { 
-  display: flex; align-items: center; padding: 6px 12px; 
-  background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-  border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 14px; transition: 0.3s; 
+#sticky-nav {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Adjust spacing around the divider */
+  padding: 6px 15px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  transition: all 0.3s ease;
 }
 #sticky-nav.stuck { 
   position: fixed; top: 20px; margin-top: 0; 
   border: 1px solid rgba(16, 185, 129, 0.5); background: rgba(10, 10, 10, 0.95); 
   border-radius: 50px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
 }
-.nav-link { font-family: 'JetBrains Mono', monospace; color: #fff; text-decoration: none; font-size: 0.75rem; padding: 0.6rem 1.4rem; text-transform: uppercase; }
-.nav-link.active { color: var(--accent); }
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 0.6rem 0.5rem; /* Reduced padding since gap/margin handles spacing */
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-link.active {
+  color: var(--accent);
+}
+.nav-link:not(:last-child)::after {
+  content: "|";
+  margin-left: 15px; /* Space after 'Programming' */
+  color: #fff;
+  opacity: 0.3;
+  font-family: 'JetBrains Mono', monospace;
+  pointer-events: none; /* Make sure clicking the line does nothing */
+}
 
 .projects-container { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
 .section-label { font-family: 'JetBrains Mono', monospace; color: var(--accent); letter-spacing: 3px; margin-bottom: 4rem; display: flex; align-items: center; gap: 1rem; text-transform: uppercase; font-size: 0.85rem; }
@@ -111,4 +137,88 @@ body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter
 @media (max-width: 850px) {
   .about-grid, .overview-grid { grid-template-columns: 1fr; gap: 2rem; }
   .back-link { top: 20px; left: 20px; font-size: 0.6rem; }
+}
+
+/* --- SKILL RINGS REPAIR --- */
+.skills-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.skill-ring-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* Moves text "C++" down away from the circle */
+  width: 100px;
+}
+
+
+
+.ring-bg { fill: none; stroke: #111; stroke-width: 6; }
+.ring-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283; /* Handled by JS */
+  transition: stroke-dashoffset 2s cubic-bezier(0.2, 1, 0.3, 1);
+}
+/* --- SCALED HUD RINGS --- */
+.skill-ring-visual {
+  position: relative;
+  width: 110px; /* Increased from 90px */
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-ring-visual svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.skill-icon {
+  width: 80px; /* Scaled up from 40px */
+  height: 80px;
+  object-fit: contain;
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* Dimmed to make the number overlay pop */
+  opacity: 0.25; 
+  /* This filter makes black SVGs white. 
+     If an icon disappears, try removing 'invert(1)' for that specific one */
+  pointer-events: none;
+}
+
+.invert-icon {
+  filter: brightness(0) invert(1);
+}
+
+.skill-percent {
+  position: absolute;
+  z-index: 10;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem; /* Slightly larger text */
+  font-weight: 600;
+  color: var(--accent);
+  text-shadow: 0 0 15px rgba(0, 0, 0, 1);
+  pointer-events: none;
+}
+.skill-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-ghost);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  pointer-events: none;
 }
