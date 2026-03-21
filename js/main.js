@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const href = link.getAttribute('href');
                     link.classList.remove('active');
 
-                    if ((id === 'programming' || id === 'ui-art') && href === '#programming') {
+                    if (id === 'programming' && href === '#programming') {
                         link.classList.add('active');
                     }
                     if (id === 'about' && href === '#about') {

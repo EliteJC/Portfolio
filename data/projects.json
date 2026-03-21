@@ -1,0 +1,171 @@
+{
+  "projects": [
+    {
+      "slug": "thebook",
+      "title": "The Book",
+      "category": "Gameplay Programming",
+      "subInfo": "Personal Project | Blueprints | Unreal Engine",
+      "lead": "A narrative game where you play as an author trapped in a world of their own making.",
+      "meta": [
+        { "label": "Duration", "value": "TBD" },
+        { "label": "Team Size", "value": "Solo" }
+      ],
+      "heroMedia": {
+        "type": "image",
+        "src": "assets/images/thebook_title.png",
+        "alt": "The Book — title screen"
+      },
+      "overview": "The Book is a game where you play as an author trapped in a world of their making after losing a beloved family member. Edit this overview in data/projects.json — add your GIFs and bullets below.",
+      "tags": ["Unreal Engine", "Blueprints", "Gameplay Systems"],
+      "showcases": [
+        {
+          "kicker": "Feature 01",
+          "heading": "Core gameplay",
+          "bullets": [
+            "Replace with what the clip shows.",
+            "Your implementation notes.",
+            "Outcome or lesson learned."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/thebook_title.png",
+            "alt": "Gameplay preview"
+          }
+        },
+        {
+          "kicker": "Feature 02",
+          "heading": "Systems or polish",
+          "bullets": [
+            "Second GIF or video row — same pattern.",
+            "Keep bullets tied to what viewers see."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/thebook_title.png",
+            "alt": "Second feature preview"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "example-game",
+      "title": "Example Game",
+      "category": "Gameplay Programming",
+      "subInfo": "Group Project | Blueprints | Unreal Engine",
+      "lead": "One-sentence pitch of the project and what makes it stand out from your other work.",
+      "meta": [
+        { "label": "Duration", "value": "8 Weeks" },
+        { "label": "Team Size", "value": "4 People" }
+      ],
+      "heroMedia": {
+        "type": "image",
+        "src": "assets/images/project-main-shot.jpg",
+        "alt": "Project hero preview"
+      },
+      "overview": "Replace this overview in data/projects.json. Use project.html?slug=example-game or duplicate the JSON entry for each real project.",
+      "tags": ["Unreal Engine", "Blueprints", "Gameplay Systems", "Optimization"],
+      "showcases": [
+        {
+          "kicker": "Feature 01",
+          "heading": "Core Interaction Loop",
+          "bullets": [
+            "Describe what this GIF/video demonstrates in gameplay terms.",
+            "Call out your specific implementation choices and why they mattered.",
+            "Mention measurable result: clarity, responsiveness, speed, etc."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature one preview"
+          }
+        },
+        {
+          "kicker": "Feature 02",
+          "heading": "System or Tooling Improvement",
+          "bullets": [
+            "Use this block for AI, combat behavior, or tooling.",
+            "Keep bullets short and tied to what users can see in the clip."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature two preview"
+          }
+        },
+        {
+          "kicker": "Feature 03",
+          "heading": "Polish and Final Results",
+          "bullets": [
+            "Show your polish pass, edge-case handling, or optimization win.",
+            "End with a concrete outcome that supports your role value."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature three preview"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "test-game",
+      "title": "Test Game",
+      "category": "Gameplay Programming",
+      "subInfo": "Group Project | Blueprints | Unreal Engine",
+      "lead": "One-sentence pitch of the project and what makes it stand out from your other work.",
+      "meta": [
+        { "label": "Duration", "value": "8 Weeks" },
+        { "label": "Team Size", "value": "4 People" }
+      ],
+      "heroMedia": {
+        "type": "image",
+        "src": "assets/images/project-main-shot.jpg",
+        "alt": "Project hero preview"
+      },
+      "overview": "Replace this overview in data/projects.json. Use project.html?slug=example-game or duplicate the JSON entry for each real project.",
+      "tags": ["Unreal Engine", "Blueprints", "Gameplay Systems", "Optimization"],
+      "showcases": [
+        {
+          "kicker": "Feature 01",
+          "heading": "Core Interaction Loop",
+          "bullets": [
+            "Describe what this GIF/video demonstrates in gameplay terms.",
+            "Call out your specific implementation choices and why they mattered.",
+            "Mention measurable result: clarity, responsiveness, speed, etc."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature one preview"
+          }
+        },
+        {
+          "kicker": "Feature 02",
+          "heading": "System or Tooling Improvement",
+          "bullets": [
+            "Use this block for AI, combat behavior, or tooling.",
+            "Keep bullets short and tied to what users can see in the clip."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature two preview"
+          }
+        },
+        {
+          "kicker": "Feature 03",
+          "heading": "Polish and Final Results",
+          "bullets": [
+            "Show your polish pass, edge-case handling, or optimization win.",
+            "End with a concrete outcome that supports your role value."
+          ],
+          "media": {
+            "type": "image",
+            "src": "assets/images/project-main-shot.jpg",
+            "alt": "Feature three preview"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -13,7 +13,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
 
-/* --- HOME PAGE HERO --- */
 .hero { position: relative; height: 100vh; display: flex; justify-content: center; align-items: center; }
 .hero video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 .hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.75); }
@@ -32,12 +31,18 @@ body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 #sticky-nav.stuck { 
   position: fixed; top: 20px; margin-top: 0; 
   border: 1px solid rgba(16, 185, 129, 0.5); background: rgba(10, 10, 10, 0.95); 
-  border-radius: 50px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
+  border-radius: 50px; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  max-width: calc(100vw - 24px);
 }
 .nav-link {
   font-family: 'JetBrains Mono', monospace;
@@ -65,8 +70,11 @@ body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter
 .section-label { font-family: 'JetBrains Mono', monospace; color: var(--accent); letter-spacing: 3px; margin-bottom: 4rem; display: flex; align-items: center; gap: 1rem; text-transform: uppercase; font-size: 0.85rem; }
 .section-label::after { content: ""; height: 1px; flex-grow: 1; background: #222; }
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-.art-bg { background: var(--bg-offset); border-top: 1px solid #111; border-bottom: 1px solid #111; }
-
+.project-link-wrapper {
+  text-decoration: none;
+  color: inherit; /* Keeps your white/grey text colors */
+  display: block; /* Makes the link fill the whole card */
+}
 .project-card { background: var(--card-bg); border: 1px solid #1a1a1a; border-radius: 8px; overflow: hidden; transition: 0.3s ease; }
 .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 .card-image { aspect-ratio: 16/9; background-size: cover; background-position: center; border-bottom: 1px solid #1a1a1a; }
@@ -134,9 +142,342 @@ body { background: var(--bg-black); color: var(--text-main); font-family: 'Inter
 #backToTop.show { opacity: 1; visibility: visible; }
 .main-footer { padding: 60px 0; text-align: center; color: var(--text-ghost); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; border-top: 1px solid #111; }
 
+/* --- PROJECT PAGE: gameplay banner (like index hero, shorter) --- */
+.project-banner {
+  position: relative;
+  width: 100%;
+  min-height: clamp(260px, 42vh, 440px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-banner-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.project-banner-media img,
+.project-banner-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+.project-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.78) 55%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+}
+
+.project-banner-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 110px 2rem 3rem;
+  text-align: center;
+}
+
+.project-banner-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  margin: 12px 0 10px;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+.project-banner .project-category-tag {
+  display: inline-block;
+}
+
+.project-banner .project-lead {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 52ch;
+}
+
+.project-banner .project-meta-row {
+  justify-content: center;
+}
+
+.project-banner--loading {
+  min-height: 220px;
+  background: #080808;
+}
+
+.project-banner--loading .project-banner-overlay {
+  opacity: 0.6;
+}
+
+.sub-info {
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.project-lead {
+  margin-top: 1.25rem;
+  max-width: 55ch;
+  color: var(--text-dim);
+}
+
+.project-meta-row {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.meta-pill {
+  border: 1px solid #202020;
+  background: #0b0b0b;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 140px;
+}
+
+.meta-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-ghost);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.meta-value {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-main);
+  font-size: 0.86rem;
+}
+
+.project-section {
+  margin-bottom: 85px;
+}
+
+.project-overview-copy {
+  max-width: 70ch;
+  color: var(--text-dim);
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.snapshot-card {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.snapshot-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 0.55rem;
+}
+
+.snapshot-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.tag-group {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-chip {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.09);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-grid img,
+.gallery-grid video {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #1a1a1a;
+}
+
+.showcase-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.showcase-item {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.showcase-media {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.showcase-media img,
+.showcase-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showcase-copy {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+
+.showcase-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.showcase-copy h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.showcase-copy ul {
+  list-style: none;
+}
+
+.showcase-copy li {
+  color: var(--text-dim);
+  margin-bottom: 0.65rem;
+  padding-left: 18px;
+  position: relative;
+}
+
+.showcase-copy li::before {
+  content: "•";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+.project-page-loading {
+  text-align: center;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.project-page-error {
+  max-width: 50ch;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: rgba(10, 10, 10, 0.85);
+  text-align: left;
+}
+
+.project-page-error p {
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.project-page-error-hint {
+  font-size: 0.85rem;
+  color: var(--text-ghost);
+}
+
+.project-page-error code {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
 @media (max-width: 850px) {
   .about-grid, .overview-grid { grid-template-columns: 1fr; gap: 2rem; }
   .back-link { top: 20px; left: 20px; font-size: 0.6rem; }
+  #sticky-nav {
+    gap: 2px;
+    padding: 5px 10px;
+    max-width: calc(100vw - 20px);
+  }
+  .nav-link {
+    font-size: 0.68rem;
+    padding: 0.5rem 0.42rem;
+  }
+  .nav-link:not(:last-child)::after {
+    margin-left: 9px;
+  }
+  .project-banner-content {
+    padding: 100px 1.25rem 2.25rem;
+  }
+  .project-banner {
+    min-height: clamp(240px, 38vh, 380px);
+  }
+  .project-meta-row {
+    gap: 8px;
+  }
+  .showcase-item {
+    grid-template-columns: 1fr;
+  }
+  .showcase-media {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 420px) {
+  #sticky-nav {
+    padding: 4px 8px;
+  }
+  .nav-link {
+    font-size: 0.63rem;
+    padding: 0.45rem 0.32rem;
+  }
+  .nav-link:not(:last-child)::after {
+    margin-left: 7px;
+  }
 }
 
 /* --- SKILL RINGS REPAIR --- */
