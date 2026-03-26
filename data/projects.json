@@ -3,46 +3,68 @@
     {
       "slug": "thebook",
       "title": "The Book",
-      "category": "Gameplay Programming",
-      "subInfo": "Personal Project | Blueprints | Unreal Engine",
       "lead": "A narrative game where you play as an author trapped in a world of their own making.",
       "meta": [
-        { "label": "Duration", "value": "TBD" },
-        { "label": "Team Size", "value": "Solo" }
+        { "label": "Duration", "value": "Ongoing" },
+        { "label": "Team Size", "value": "3" }
       ],
       "heroMedia": {
         "type": "image",
-        "src": "assets/images/thebook_title.png",
+        "src": "assets/images/TheBook_Banner.png",
         "alt": "The Book — title screen"
       },
-      "overview": "The Book is a game where you play as an author trapped in a world of their making after losing a beloved family member. Edit this overview in data/projects.json — add your GIFs and bullets below.",
+      "overview": "The Book is a game where you play as an author trapped in a world of their making after losing a beloved family member.",
       "tags": ["Unreal Engine", "Blueprints", "Gameplay Systems"],
       "showcases": [
         {
           "kicker": "Feature 01",
-          "heading": "Core gameplay",
+          "heading": "Diegetic Title Screen",
           "bullets": [
-            "Replace with what the clip shows.",
-            "Your implementation notes.",
-            "Outcome or lesson learned."
+            "Programmed an interaction system to allow the player to interact with the 3D book mesh"
           ],
           "media": {
-            "type": "image",
-            "src": "assets/images/thebook_title.png",
+            "type": "video",
+            "src": "assets/videos/TheBook/TheBook_DiegeticTitleScreen.mp4",
             "alt": "Gameplay preview"
           }
         },
         {
           "kicker": "Feature 02",
-          "heading": "Systems or polish",
+          "heading": "Save and Load System",
           "bullets": [
-            "Second GIF or video row — same pattern.",
-            "Keep bullets tied to what viewers see."
+            "Implemented a loading system using the diegetic title screen",
+            "Programmed a saving system that saves the players location data"
           ],
           "media": {
-            "type": "image",
-            "src": "assets/images/thebook_title.png",
+            "type": "video",
+            "src": "assets/videos/TheBook/TheBook_Saving.mp4",
             "alt": "Second feature preview"
+          }
+        },
+        {
+          "kicker": "Feature 03",
+          "heading": "Movement and Combat",
+          "bullets": [
+            "Modified Unreal's Third Person Template Blueprint to include a combat system",
+            "Improved movement by adding a rolling action",
+            "Implemented animations to have seemless transitions between each other"
+          ],
+          "media": {
+            "type": "video",
+            "src": "assets/videos/TheBook/TheBook_MovementAndCombat.mp4",
+            "alt": "Gameplay preview"
+          }
+        },
+        {
+          "kicker": "Feature 04",
+          "heading": "Enemy AI",
+          "bullets": [
+            "Programmed an enemy behavior tree that idles and can follow the player"
+          ],
+          "media": {
+            "type": "video",
+            "src": "assets/videos/TheBook/TheBook_EnemyAI.mp4",
+            "alt": "Gameplay preview"
           }
         }
       ]
@@ -51,7 +73,6 @@
       "slug": "example-game",
       "title": "Example Game",
       "category": "Gameplay Programming",
-      "subInfo": "Group Project | Blueprints | Unreal Engine",
       "lead": "One-sentence pitch of the project and what makes it stand out from your other work.",
       "meta": [
         { "label": "Duration", "value": "8 Weeks" },
@@ -111,7 +132,6 @@
       "slug": "test-game",
       "title": "Test Game",
       "category": "Gameplay Programming",
-      "subInfo": "Group Project | Blueprints | Unreal Engine",
       "lead": "One-sentence pitch of the project and what makes it stand out from your other work.",
       "meta": [
         { "label": "Duration", "value": "8 Weeks" },

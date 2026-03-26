@@ -1,7 +1,3 @@
-/**
- * Loads project content from data/projects.json based on ?slug= in the URL.
- * Open via local server (Live Server, `npx serve`, etc.) — fetch() may fail on file://
- */
 (function () {
   'use strict';
 
@@ -48,7 +44,7 @@
         ? ' poster="' + escapeHtml(media.poster) + '"'
         : '';
       return (
-        '<video autoplay muted loop playsinline preload="metadata"' +
+        '<video muted loop playsinline preload="metadata"' +
         posterAttr +
         '>' +
         '<source src="' +
@@ -60,7 +56,6 @@
     return '<img src="' + escapeHtml(media.src) + '" alt="' + alt + '">';
   }
 
-  /** Background media: decorative (parent has aria-hidden); keeps video poster behavior */
   function renderHeroMedia(media) {
     if (!media || !media.src) return '';
     if (media.type === 'video') {
@@ -87,9 +82,6 @@
           '<p class="showcase-kicker">' +
           escapeHtml(s.kicker || '') +
           '</p>' +
-          '<h3>' +
-          escapeHtml(s.heading || '') +
-          '</h3>' +
           '<ul>' +
           bullets +
           '</ul>' +
@@ -99,6 +91,70 @@
       })
       .join('');
   }
+
+  // --- NEW: Focus Scroll Logic ---
+ function initFocusScroll() {
+  const items = document.querySelectorAll('.showcase-item');
+  if (!items.length) return;
+
+  let lastScrollY = window.scrollY;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-45% 0px -45% 0px', // Narrower strike zone
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('video');
+      const isScrollingDown = window.scrollY > lastScrollY;
+      
+      if (entry.isIntersecting) {
+        // Clear all others to ensure only one is active
+        items.forEach(item => {
+          if (item !== entry.target) {
+            item.classList.remove('is-focused');
+            const otherVid = item.querySelector('video');
+            if (otherVid) otherVid.pause();
+          }
+        });
+
+        entry.target.classList.add('is-focused');
+        if (video) video.play().catch(() => {});
+      } else {
+        // EDGE CASE FIX: If scrolling UP and leaving a zone, 
+        // don't hide the video until the next one is ready.
+        if (isScrollingDown) {
+          entry.target.classList.remove('is-focused');
+          if (video) video.pause();
+        }
+      }
+    });
+    lastScrollY = window.scrollY;
+  }, observerOptions);
+
+  items.forEach(item => observer.observe(item));
+
+  // Top-of-page failsafe remains for the hero section
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 150) {
+      if (!items[0].classList.contains('is-focused')) {
+        items[0].classList.add('is-focused');
+        const firstVideo = items[0].querySelector('video');
+        if (firstVideo) firstVideo.play().catch(() => {});
+      }
+    }
+    lastScrollY = window.scrollY;
+  });
+
+  // Initial load
+  if (window.scrollY < 150) {
+    items[0].classList.add('is-focused');
+    const firstVideo = items[0].querySelector('video');
+    if (firstVideo) firstVideo.play().catch(() => {});
+  }
+}
 
   function showError(message) {
     var hero = document.getElementById('project-hero');
@@ -126,6 +182,9 @@
     var leadHtml = p.lead
       ? '<p class="project-lead">' + escapeHtml(p.lead) + '</p>'
       : '';
+    var subInfoHtml = p.subInfo
+      ? '<p class="sub-info">' + escapeHtml(p.subInfo) + '</p>'
+      : '';
 
     var metaHtml = renderMetaRow(p.meta);
     var metaRowHtml = metaHtml
@@ -141,15 +200,10 @@
         '</div>' +
         '<div class="project-banner-overlay"></div>' +
         '<div class="project-banner-content">' +
-        '<span class="project-category-tag">' +
-        escapeHtml(p.category || 'Gameplay Programming') +
-        '</span>' +
         '<h1>' +
         escapeHtml(p.title) +
         '</h1>' +
-        '<p class="sub-info">' +
-        escapeHtml(p.subInfo || '') +
-        '</p>' +
+        subInfoHtml +
         leadHtml +
         metaRowHtml +
         '</div>';
@@ -171,6 +225,9 @@
     if (showcase) {
       showcase.innerHTML =
         '<h2 class="detail-label">Visual Breakdown</h2>' + renderShowcases(p.showcases);
+      
+      // CRITICAL: Initialize the observer AFTER content is added to the DOM
+      initFocusScroll();
     }
   }
 
